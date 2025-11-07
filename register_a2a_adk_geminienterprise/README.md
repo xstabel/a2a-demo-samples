@@ -119,6 +119,12 @@ gcloud run services add-iam-policy-binding $SERVICE_NAME \
   --project=$PROJECT_ID \
   --region=$REGION
 
+# Or grant the  "Cloud Run Invoker" role to the following principal in the project where Cloud Run is running: `service-PROJECT_NUMBER@gcp-sa-discoveryengine.iam.gserviceaccount.com`
+
+gcloud projects add-iam-policy-binding yogaproject-1508 \
+    --member="serviceAccount:service-${PROJECT_NUMBER}@gcp-sa-discoveryengine.iam.gserviceaccount.com" \
+    --role="roles/run.invoker"
+
 # --- 3. Register with Gemini Enterprise ---
 # Define agent metadata
 export AGENT_DISPLAY_NAME="My A2A Agent"
